@@ -1,66 +1,136 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Shop Application with Admin Panel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
+This Laravel-based shop application provides:
+- A **RESTful API** for product listing, creation, updating, and deletion.
+- An **admin panel** built with Laravel Jetstream and Livewire for managing products and orders.
+- A **clean architecture** using the Repository Pattern and Service Layer, following **SOLID principles**.
+- **Unit tests** to ensure high code quality and maintainability.
 
-## About Laravel
+## Features
+- **Product API**: List, view, create, update, and delete products.
+- **Admin Panel**: Manage products and view orders using Livewire components.
+- **Clean Code Architecture**: Repositories for data access and services for business logic.
+- **Test Coverage**: Unit tests for the service layer.
+- **Documentation**: Detailed setup instructions and API documentation.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Setup Instructions
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/laravel-shop.git
+cd laravel-shop
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Install Dependencies
+```bash
+composer install
+npm install
+npm run dev
+```
 
-## Learning Laravel
+### 3. Environment Configuration
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 4. Database Setup
+```bash
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database/database.sqlite
+touch database/database.sqlite
+php artisan migrate
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 5. Run the Application
+```bash
+php artisan serve
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 6. Run Tests
+```bash
+php artisan test
+```
 
-## Laravel Sponsors
+## API Documentation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Endpoints
 
-### Premium Partners
+#### 1. List All Products
+**GET** `/api/products`
+- Returns all products in JSON format.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### 2. Get Product Details
+**GET** `/api/products/{id}`
+- Returns product details for the given ID.
 
-## Contributing
+#### 3. Create a Product
+**POST** `/api/products`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Request Body:**
+```json
+{
+  "name": "Product Name",
+  "description": "Product Description",
+  "price": 99.99,
+  "stock_quantity": 10
+}
+```
+- Returns the newly created product.
 
-## Code of Conduct
+#### 4. Update a Product
+**PUT** `/api/products/{id}`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Request Body (partial or full update):**
+```json
+{
+  "name": "Updated Name",
+  "price": 89.99
+}
+```
+- Returns a success message.
 
-## Security Vulnerabilities
+#### 5. Delete a Product
+**DELETE** `/api/products/{id}`
+- Returns a success message.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Development Methodology
 
-## License
+### Architecture
+- **Repository Pattern**: Separates data access logic (`ProductRepository`) from business logic.
+- **Service Layer**: Encapsulates business rules and utilizes repositories.
+- **SOLID Principles**:
+  - Each class has a single responsibility.
+  - Dependencies are injected.
+  - Code is open for extension but closed for modification.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Testing
+- Unit tests for service methods ensure code reliability.
+
+### Admin Panel
+- Built with Jetstream & Livewire for product and order management.
+
+### Error Handling
+- Uses Laravel’s validation and exception handling to provide meaningful HTTP responses.
+
+## Assumptions & Design Decisions
+- The **product management functionality** is the core focus; cart and order management follow similar patterns.
+- The **repository and service layers** allow easy swapping of data sources or additional business rules.
+- The **admin panel** is secured using Jetstream’s authentication features.
+- The **codebase follows modern PHP practices** with clear inline documentation.
+
+## Additional Notes
+- Extend the application by adding controllers and services for **cart** and **order management**.
+- Use middleware (e.g., `AdminMiddleware`) to restrict admin routes as needed.
+- Inline PHPDoc comments are added to classes and methods for clarity.
+
+## Conclusion
+This complete solution demonstrates how to build a Laravel shop application that:
+
+- Uses the **Repository Pattern** with a **Service Layer** to separate concerns.
+- Follows **SOLID principles** and other design patterns.
+- Provides both a **RESTful API** and an **admin panel** using Jetstream/Livewire.
+- Includes improved **test coverage** and comprehensive **documentation** for setup and development.
+
+If I had more time I would implement more endpoints (e.g., for cart and order management), more unit tests, and refining the admin interface as needed. I would also improve validation and include attributes across all classes and functions.
