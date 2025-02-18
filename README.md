@@ -18,8 +18,8 @@ This Laravel-based shop application provides:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/laravel-shop.git
-cd laravel-shop
+git clone https://github.com/demoric102/shop-api.git
+cd shop-api
 ```
 
 ### 2. Install Dependencies
