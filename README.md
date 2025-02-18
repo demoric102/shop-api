@@ -15,6 +15,7 @@ This Laravel-based shop application provides:
 - **Documentation**: Detailed setup instructions and API documentation.
 
 ## Setup Instructions
+Download the Shop API postman collection and import it into your postman. You can use either the seeder or the registration endpoint to create an authenticated user, which you would use throughout the requests.
 
 ### 1. Clone the Repository
 ```bash
